@@ -1,0 +1,43 @@
+.form,
+.form label {
+  font-weight: 600;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.form label input {
+  border: 2px solid rgb(151, 1, 245);
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  max-width: 250px;
+  height: 30px;
+  outline: none;
+  transition: all 150ms linear;
+}
+
+.form label input::placeholder {
+  font-style: italic;
+}
+.form label input:focus {
+  box-shadow: rgb(93, 75, 158) 0px 5px 20px 0px,
+    rgb(93, 75, 158) 0px 0px 0px 1px;
+}
+
+.form button {
+  padding: 10px 15px;
+  max-width: 100px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: rgb(189 189 189);
+  transition: all 150ms linear;
+}
+
+.form button:hover {
+  background-color: rgb(161, 160, 160);
+}

@@ -1,0 +1,29 @@
+.navLink {
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 5px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: white;
+  transition: all 100ms linear;
+  height: 37px;
+}
+
+.active {
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 5px;
+  border-radius: 6px;
+  text-decoration: none;
+  background-color: rgb(140, 165, 224);
+  color: white;
+  height: 37px;
+}
+
+.navLink:not(.active):hover {
+  color: rgb(140, 165, 224);
+}

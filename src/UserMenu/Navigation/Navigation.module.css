@@ -1,0 +1,6 @@
+.nav_list {
+  display: flex;
+  font-size: 18px;
+  flex-direction: column;
+  row-gap: 20px;
+}
