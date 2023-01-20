@@ -23,8 +23,10 @@ const ContactsView = () => {
     <section className={css.section}>
       <h2>CONTACTS LIST</h2>
       <ContactsForm />
+
       <Filter />
       {isLoading && !error && <Loader />}
+      {/* <Loader /> */}
       <ContactsList />
     </section>
   );

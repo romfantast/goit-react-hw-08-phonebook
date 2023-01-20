@@ -1,13 +1,16 @@
 import React from 'react';
 import css from './RegisterView.module.css';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import authOperations from 'redux/auth/auth-operations';
+import { RotatingLines } from 'react-loader-spinner';
+import authSelectors from 'redux/auth/auth-selectors';
 
 const RegisterView = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const isLoadingLogin = useSelector(authSelectors.selectIsLoadingLogin);
   const dispatch = useDispatch();
 
   const handleChange = ({ target: { name, value } }) => {
@@ -62,7 +65,20 @@ const RegisterView = () => {
             name="email"
           />
         </label>
-        <button>Register</button>
+        <button>
+          Register
+          {isLoadingLogin && (
+            <span>
+              <RotatingLines
+                strokeColor="cornflowerblue"
+                strokeWidth="5"
+                animationDuration="0.75"
+                width="20"
+                visible={true}
+              />
+            </span>
+          )}
+        </button>
       </form>
     </>
   );

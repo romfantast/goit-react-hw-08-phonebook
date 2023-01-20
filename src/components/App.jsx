@@ -1,4 +1,3 @@
-import { lazy } from 'react';
 import { Route, Routes } from 'react-router';
 import { Layout } from './Layout/Layout';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,11 +7,10 @@ import PrivateRoute from './Routes/PrivateRoute';
 import { Profile } from 'views/Profile/Profile';
 import PublicRoute from './Routes/PublicRoute';
 import authSelectors from 'redux/auth/auth-selectors';
-
-const Home = lazy(() => import('../pages/Home/Home'));
-const RegisterView = lazy(() => import('../views/RegisterView/RegisterView'));
-const LoginView = lazy(() => import('../views/LoginView/LoginView'));
-const ContactsView = lazy(() => import('../views/ContactsView/ContactsView'));
+import Home from 'pages/Home/Home';
+import RegisterView from 'views/RegisterView/RegisterView';
+import LoginView from 'views/LoginView/LoginView';
+import ContactsView from 'views/ContactsView/ContactsView';
 
 export const App = () => {
   const dispatch = useDispatch();

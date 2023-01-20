@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import css from './Layout.module.css';
 import { Outlet } from 'react-router';
 import { AppBar } from 'UserMenu/AppBar/AppBar';
@@ -10,12 +10,10 @@ export const Layout = () => {
   return (
     <div className={css.layout}>
       <AppBar />
-      <Suspense fallback={null}>
-        {isRefreshing && <p>Loading...</p>}
-        <div className={css.content}>
-          <Outlet />
-        </div>
-      </Suspense>
+      {isRefreshing && <p>Loading...</p>}
+      <div className={css.content}>
+        <Outlet />
+      </div>
     </div>
   );
 };

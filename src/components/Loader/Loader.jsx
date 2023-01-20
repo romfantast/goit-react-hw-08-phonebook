@@ -11,7 +11,6 @@ export const Loader = () => {
         radius="7"
         color="#1f59b0"
         ariaLabel="three-dots-loading"
-        wrapperStyle={{}}
         wrapperClassName=""
         visible={true}
       />
