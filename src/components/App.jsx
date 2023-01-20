@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router';
+import { Navigate, Route, Routes } from 'react-router';
 import { Layout } from './Layout/Layout';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -24,6 +24,7 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="*" element={<Navigate to="/" />} />
 
           <Route path="/" element={<PrivateRoute redirectTo="/login" />}>
             <Route path="contacts" element={<ContactsView />} />
