@@ -15,61 +15,60 @@ const initialState = {
   isLoading: false,
 };
 
+const setDataWhenFullfield = (state, action) => {
+  state.user = action.payload.user;
+  state.token = action.payload.token;
+  state.isLoggedIn = true;
+  state.isLoading = false;
+};
+
+const loading = state => {
+  state.isLoading = true;
+};
+const endLoading = state => {
+  state.isLoading = false;
+};
+
+const resetWhenLogout = state => {
+  state.user = {
+    name: null,
+    email: null,
+  };
+  state.token = null;
+  state.isLoggedIn = false;
+  state.isLoading = false;
+};
+
+const setWhenFullfield = (state, action) => {
+  state.user = action.payload;
+  state.isLoggedIn = true;
+  state.isFetchingCurrent = false;
+  state.isLoading = false;
+};
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  extraReducers: {
-    [authOperations.register.pending](state, _) {
-      state.isLoading = true;
-    },
-    [authOperations.register.fulfilled](state, action) {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isLoggedIn = true;
-      state.isLoading = false;
-    },
-    [authOperations.register.rejected](state, _) {
-      state.isLoading = false;
-    },
+  extraReducers: builder => {
+    builder
+      .addCase(authOperations.register.pending, (state, _) => {
+        state.isLoading = true;
+      })
+      .addCase(authOperations.logIn.pending, loading)
+      .addCase(authOperations.logOut.pending, loading)
+      .addCase(authOperations.fetchCurrentUser.pending, loading)
 
-    [authOperations.logIn.pending](state, _) {
-      state.isLoading = true;
-    },
-    [authOperations.logIn.fulfilled](state, action) {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isLoggedIn = true;
-      state.isLoading = false;
-    },
-    [authOperations.logIn.rejected](state, _) {
-      state.isLoading = false;
-    },
-    [authOperations.logOut.pending](state, _) {
-      state.isLoading = true;
-    },
-    [authOperations.logOut.fulfilled](state, _) {
-      state.user = {
-        name: null,
-        email: null,
-      };
-      state.token = null;
-      state.isLoggedIn = false;
-      state.isLoading = false;
-    },
-    [authOperations.logOut.rejected](state, _) {
-      state.isLoading = false;
-    },
-    [authOperations.fetchCurrentUser.pending](state, _) {
-      state.isFetchingCurrent = true;
-    },
-    [authOperations.fetchCurrentUser.fulfilled](state, action) {
-      state.user = action.payload;
-      state.isLoggedIn = true;
-      state.isFetchingCurrent = false;
-    },
-    [authOperations.fetchCurrentUser.rejected](state, _) {
-      state.isFetchingCurrent = false;
-    },
+      .addCase(authOperations.register.fulfilled, setDataWhenFullfield)
+      .addCase(authOperations.logIn.fulfilled, setDataWhenFullfield)
+      .addCase(authOperations.logOut.fulfilled, resetWhenLogout)
+      .addCase(authOperations.fetchCurrentUser.fulfilled, setWhenFullfield)
+
+      .addCase(authOperations.register.rejected, (state, _) => {
+        state.isLoading = false;
+      })
+      .addCase(authOperations.logIn.rejected, endLoading)
+      .addCase(authOperations.logOut.rejected, endLoading)
+      .addCase(authOperations.fetchCurrentUser.rejected, endLoading);
   },
 });
 
