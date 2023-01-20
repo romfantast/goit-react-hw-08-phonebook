@@ -9,7 +9,7 @@
 
 .form label input {
   border: 2px solid rgb(151, 1, 245);
-  padding: 5px 10px;
+  padding: 5px 30px;
   font-size: 16px;
   border-radius: 4px;
   max-width: 250px;
@@ -27,6 +27,10 @@
 }
 
 .form button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
   padding: 10px 15px;
   max-width: 100px;
   border: none;
@@ -40,4 +44,15 @@
 
 .form button:hover {
   background-color: rgb(161, 160, 160);
+}
+
+.inputWrapper {
+  position: relative;
+}
+.look_icon {
+  fill: rgb(64 96 172);
+  position: absolute;
+  top: 43px;
+  left: 5px;
+  cursor: pointer;
 }

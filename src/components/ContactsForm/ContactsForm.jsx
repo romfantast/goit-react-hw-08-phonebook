@@ -19,6 +19,7 @@ export const ContactsForm = () => {
     ) {
       return Notify.warning('This contact is already in the list');
     }
+
     const contact = {
       name: name.value,
       number: number.value,

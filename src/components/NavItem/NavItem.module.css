@@ -1,4 +1,6 @@
 .navLink {
+  display: flex;
+  justify-content: space-between;
   padding: 5px 10px;
   display: flex;
   flex-direction: row;
@@ -14,6 +16,8 @@
 .active {
   padding: 5px 10px;
   display: flex;
+  display: flex;
+  justify-content: space-between;
   flex-direction: row;
   align-items: center;
   column-gap: 5px;

@@ -11,7 +11,7 @@ import {
 } from 'redux/contacts/contacts-selectors';
 import css from './ContactsView.module.css';
 
-export const ContactsView = () => {
+const ContactsView = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
@@ -29,3 +29,5 @@ export const ContactsView = () => {
     </section>
   );
 };
+
+export default ContactsView;

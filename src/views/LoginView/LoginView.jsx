@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import css from '../RegisterView/RegisterView.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import authOperations from 'redux/auth/auth-operations';
 import { Notify } from 'notiflix';
+import { AiFillEye, AiOutlineMail } from 'react-icons/ai';
+import { RotatingLines } from 'react-loader-spinner';
+import authSelectors from 'redux/auth/auth-selectors';
 
-export const LoginView = () => {
+const LoginView = () => {
+  const [type, setType] = useState('password');
   const [password, setPassword] = useState('5a3820b2d');
   const [email, setEmail] = useState('passatik@gmail.com');
   const dispatch = useDispatch();
+  const isLoadingLogin = useSelector(authSelectors.selectIsLoadingLogin);
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -29,11 +34,18 @@ export const LoginView = () => {
     setEmail('');
   };
 
+  const handleShowPass = e => {
+    setType('text');
+  };
+  const handleHidePass = e => {
+    setType('password');
+  };
+
   return (
     <>
       <h2>Login page</h2>
       <form onSubmit={handleSubmit} className={css.form}>
-        <label>
+        <label className={css.inputWrapper}>
           Your email:
           <input
             onChange={handleChange}
@@ -42,19 +54,40 @@ export const LoginView = () => {
             name="email"
             value={email}
           />
+          <AiOutlineMail className={css.look_icon} />
         </label>
-        <label>
+        <label className={css.inputWrapper}>
           Your password:
           <input
             onChange={handleChange}
-            type="password"
+            type={type}
             placeholder="password"
             name="password"
             value={password}
           />
+          <span>
+            <AiFillEye
+              className={css.look_icon}
+              onMouseEnter={handleShowPass}
+              onMouseLeave={handleHidePass}
+            />
+          </span>
         </label>
-        <button>Login</button>
+        <button>
+          Login
+          {isLoadingLogin && (
+            <RotatingLines
+              strokeColor="cornflowerblue"
+              strokeWidth="5"
+              animationDuration="0.75"
+              width="20"
+              visible={true}
+            />
+          )}
+        </button>
       </form>
     </>
   );
 };
+
+export default LoginView;

@@ -6,33 +6,24 @@ import css from './ContactsList.module.css';
 
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  selectContacts,
+  selectFilteredContacts,
   selectIsLoading,
 } from 'redux/contacts/contacts-selectors';
-import { selectFindFilter } from 'redux/filter/filter-selectors';
 import { deleteContact } from 'redux/contacts/contacts-operations';
 import NoContactsInfo from 'components/NoContactInfo/NoContactInfo';
 
 const ContactsList = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
   const isLoading = useSelector(selectIsLoading);
-  const filter = useSelector(selectFindFilter);
-
-  const showFilteredContacts = (() => {
-    const filterStr = filter.toLowerCase();
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filterStr)
-    );
-  })();
+  const contacts = useSelector(selectFilteredContacts);
 
   const handleDelete = id => dispatch(deleteContact(id));
 
   return (
     <>
       <ul className={css.contactList}>
-        {showFilteredContacts.length === 0 && !isLoading && <NoContactsInfo />}
-        {showFilteredContacts.map(contact => (
+        {contacts.length === 0 && !isLoading && <NoContactsInfo />}
+        {contacts.map(contact => (
           <li className={css.contactItem} key={contact.id}>
             <p className={css.contactInfoWrapper}>
               <BiUserCircle className={css.contactIcon} />
