@@ -19,6 +19,7 @@ const ContactsView = () => {
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
+
   return (
     <section className={css.section}>
       <h2>CONTACTS LIST</h2>
@@ -26,7 +27,6 @@ const ContactsView = () => {
 
       <Filter />
       {isLoading && !error && <Loader />}
-      {/* <Loader /> */}
       <ContactsList />
     </section>
   );

@@ -44,6 +44,9 @@ const authSlice = createSlice({
     [authOperations.logIn.rejected](state, _) {
       state.isLoading = false;
     },
+    [authOperations.logOut.pending](state, _) {
+      state.isLoading = true;
+    },
     [authOperations.logOut.fulfilled](state, _) {
       state.user = {
         name: null,
@@ -51,6 +54,10 @@ const authSlice = createSlice({
       };
       state.token = null;
       state.isLoggedIn = false;
+      state.isLoading = false;
+    },
+    [authOperations.logOut.rejected](state, _) {
+      state.isLoading = false;
     },
     [authOperations.fetchCurrentUser.pending](state, _) {
       state.isFetchingCurrent = true;

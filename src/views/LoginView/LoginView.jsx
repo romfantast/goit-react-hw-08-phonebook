@@ -9,8 +9,8 @@ import authSelectors from 'redux/auth/auth-selectors';
 
 const LoginView = () => {
   const [type, setType] = useState('password');
-  const [password, setPassword] = useState('5a3820b2d');
-  const [email, setEmail] = useState('passatik@gmail.com');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const dispatch = useDispatch();
   const isLoadingLogin = useSelector(authSelectors.selectIsLoadingLogin);
 

@@ -13,12 +13,33 @@ export const Profile = () => {
     <div className={css.profile}>
       <h2>Profile page</h2>
       <hr />
+      <br />
       <p className={css.row_centered}>
         <img src={defaultAvatar} alt="" width="30" height="30" />
         {name}
       </p>
+      <br />
       <hr />
-      <p>Total contacts: {contactsQuantity.length}</p>
+      <br />
+      <p>
+        Total contacts: <b>{contactsQuantity.length}</b>
+      </p>
+      <br />
+      <hr />
+      <br />
+      <h3>More info: </h3>
+      <br />
+      <div className={css.card}>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit,
+          molestias.
+        </p>
+        <p>
+          Dignissimos labore maxime distinctio dicta nostrum consequuntur
+          blanditiis.
+        </p>
+      </div>
+      <br />
       <hr />
     </div>
   );

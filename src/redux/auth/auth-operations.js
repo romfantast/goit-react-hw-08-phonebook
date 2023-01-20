@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { Notify } from 'notiflix';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
@@ -12,27 +13,40 @@ const token = {
   },
 };
 
-const register = createAsyncThunk('auth/register', async credentials => {
-  try {
-    const { data } = await axios.post('/users/signup', credentials);
-    token.set(data.token);
-    return data;
-  } catch (error) {}
-});
+const register = createAsyncThunk(
+  'auth/register',
+  async (credentials, thunkAPI) => {
+    try {
+      const { data } = await axios.post('/users/signup', credentials);
+      token.set(data.token);
+      return data;
+    } catch (error) {
+      thunkAPI.abort();
+      Notify.warning('This user already registered');
+    }
+  }
+);
 
-const logIn = createAsyncThunk('auth/login', async credentials => {
+const logIn = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
   try {
     const { data } = await axios.post('/users/login', credentials);
     token.set(data.token);
     return data;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    thunkAPI.abort();
+    Notify.failure('This user not found');
+  }
 });
 
-const logOut = createAsyncThunk('auth/logout', async () => {
+const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await axios.post('/users/logout');
     token.unset();
-  } catch (error) {}
+  } catch (error) {
+    thunkAPI.abort();
+    console.log(error);
+  }
 });
 
 const fetchCurrentUser = createAsyncThunk(
@@ -47,7 +61,10 @@ const fetchCurrentUser = createAsyncThunk(
     try {
       const { data } = await axios.get('/users/current');
       return data;
-    } catch (error) {}
+    } catch (error) {
+      thunkAPI.abort();
+      Notify.warning('Something went wrong');
+    }
   }
 );
 
