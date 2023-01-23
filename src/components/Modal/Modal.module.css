@@ -1,0 +1,71 @@
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(68, 68, 68, 0.3);
+}
+
+.Modal {
+  padding: 30px;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.editTitle {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+
+}
+
+.editForm input {
+  font-size: 16px;
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid rgb(2, 15, 199);
+  padding: 5px 10px;
+  outline: none;
+
+}
+.btnsWrapper {
+  display: flex;
+  column-gap: 10px;
+  justify-content: flex-end;
+}
+
+.editForm button {
+  display: inline;
+  border: none;
+  padding: 5px 15px;
+  color: white;
+  font-size: 16px;
+  border-radius: 4px;
+  width: max-content;
+  transition: all 150ms linear;
+}
+
+.btnSubmit {
+  background-color: rgb(48, 169, 240);
+}
+.btnCancel {
+  background-color: rgb(240, 86, 48);
+}
+
+.btnSubmit:hover {
+background-color: rgb(36, 153, 221);
+}
+
+.btnCancel:hover {
+  background-color: rgb(199, 61, 26);
+}

@@ -4,33 +4,3 @@
   row-gap: 8px;
   list-style: none;
 }
-.contactItem {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  column-gap: 5px;
-  padding: 10px;
-  border-radius: 4px;
-  background-color: rgb(64 45 45);
-  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-}
-.contactInfoWrapper {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 5px;
-  align-items: center;
-}
-
-.contactItem p span {
-  /* margin-top: -6px; */
-}
-.contactIcon {
-  fill: rgb(119, 20, 200);
-}
-
-.contactName {
-  font-size: 20px;
-}
-.contactPhone {
-  font-size: 16px;
-}
