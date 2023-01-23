@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import css from './Modal.module.css';
 import { updateContact } from 'redux/contacts/contacts-operations';
 import { selectContacts } from 'redux/contacts/contacts-selectors';
+import { Notify } from 'notiflix';
 
 const modalRoot = document.getElementById('modal-root');
 
@@ -13,13 +14,20 @@ const Modal = ({ onToggleModal, name, number, id }) => {
   const handleSubmit = e => {
     e.preventDefault();
     const { name, number } = e.currentTarget.elements;
+    const isAlreadyInList = contacts.find(
+      contact => contact.name === name.value
+    );
+
+    if (isAlreadyInList) {
+      return Notify.warning('This contact is already in the list');
+    }
+
     const updateContactData = {
       name: name.value,
       number: number.value,
     };
 
     dispatch(updateContact({ contactId: id, contact: updateContactData }));
-
     e.target.reset();
     onToggleModal();
   };
@@ -51,15 +59,19 @@ const Modal = ({ onToggleModal, name, number, id }) => {
           onSubmit={handleSubmit}
         >
           <input
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Name may contain only letters"
+            required
             type="text"
-            onChange={() => {}}
             placeholder="name"
             name="name"
             defaultValue={name}
           />
           <input
-            type="text"
-            onChange={() => {}}
+            type="tel"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits"
+            required
             placeholder="phone"
             name="number"
             defaultValue={number}
